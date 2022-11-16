@@ -9,6 +9,8 @@ import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import Image from 'next/image'
+
 
 const Navigation = ({ user }) => {
     const router = useRouter()
@@ -16,6 +18,9 @@ const Navigation = ({ user }) => {
     const { logout } = useAuth()
 
     const [open, setOpen] = useState(false)
+
+    user = { image: "https://github.com/fabriziomachado.png", ...user }
+    console.log(user);
 
     return (
         <nav className="bg-white border-b border-gray-100">
@@ -41,7 +46,23 @@ const Navigation = ({ user }) => {
                     </div>
 
                     {/* Settings Dropdown */}
+
+
+
+
+
                     <div className="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="relative inline-block mr-2">
+                            <span class="absolute bottom-0 right-0 inline-block w-3 h-3 bg-green-600 border-2 border-white rounded-full"></span>
+                            <Image
+                                class="inline-block object-cover w-10 h-10 rounded-full"
+                                src={user?.image}
+                                alt={"Bordered avatar"}
+                                width={300}
+                                height={200}
+                            />
+                        </div>
+
                         <Dropdown
                             align="right"
                             width="48"
