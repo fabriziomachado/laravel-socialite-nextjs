@@ -38,19 +38,21 @@ const Navigation = ({ user }) => {
                         {/* Navigation Links */}
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink
+                                href="/"
+                                active={router.pathname === '/'}>
+                                Home
+                            </NavLink>
+
+                            <NavLink
                                 href="/dashboard"
                                 active={router.pathname === '/dashboard'}>
                                 Dashboard
                             </NavLink>
+
                         </div>
                     </div>
 
                     {/* Settings Dropdown */}
-
-
-
-
-
                     <div className="hidden sm:flex sm:items-center sm:ml-6">
                         <div class="relative inline-block mr-2">
                             <span class="absolute bottom-0 right-0 inline-block w-3 h-3 bg-green-600 border-2 border-white rounded-full"></span>
@@ -139,7 +141,17 @@ const Navigation = ({ user }) => {
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="flex items-center px-4">
                             <div className="flex-shrink-0">
-                                <svg
+                                <div class="relative inline-block mr-2">
+                                    <span class="absolute bottom-0 right-0 inline-block w-3 h-3 bg-green-600 border-2 border-white rounded-full"></span>
+                                    <Image
+                                        class="inline-block object-cover w-10 h-10 rounded-full"
+                                        src={user?.image}
+                                        alt={"Bordered avatar"}
+                                        width={300}
+                                        height={200}
+                                    />
+                                </div>
+                                {/* <svg
                                     className="h-10 w-10 fill-current text-gray-400"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -151,7 +163,7 @@ const Navigation = ({ user }) => {
                                         strokeWidth="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                                     />
-                                </svg>
+                                </svg> */}
                             </div>
 
                             <div className="ml-3">
