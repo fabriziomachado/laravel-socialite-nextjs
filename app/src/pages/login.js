@@ -125,6 +125,16 @@ const Login = () => {
                         <Button className="ml-3">Login</Button>
                     </div>
                 </form>
+
+
+                <div className="flex items-center justify-end mt-4 gap-3">
+                    <Link
+                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                        href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/login/github`}>
+                        Login with Github
+                    </Link>
+                </div>
+
             </AuthCard>
         </GuestLayout>
     )
