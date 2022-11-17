@@ -1,15 +1,17 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
-import AuthCard from '@/components/AuthCard'
-import AuthSessionStatus from '@/components/AuthSessionStatus'
-import Button from '@/components/Button'
-import GuestLayout from '@/components/Layouts/GuestLayout'
-import Input from '@/components/Input'
-import InputError from '@/components/InputError'
-import Label from '@/components/Label'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+
+import ApplicationLogo from '../components/ApplicationLogo'
+import AuthCard from '../components/AuthCard'
+import AuthSessionStatus from '../components/AuthSessionStatus'
+import Button from '../components/Button'
+import GuestLayout from '../components/Layouts/GuestLayout'
+import Input from '../components/Input'
+import InputError from '../components/InputError'
+import Label from '../components/Label'
+
+import { useAuth } from '../hooks/auth'
 
 const Login = () => {
     const router = useRouter()
@@ -25,13 +27,6 @@ const Login = () => {
     const [errors, setErrors] = useState([])
     const [status, setStatus] = useState(null)
 
-    useEffect(() => {
-        if (router.query.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.query.reset))
-        } else {
-            setStatus(null)
-        }
-    })
 
     const submitForm = async event => {
         event.preventDefault()
@@ -44,6 +39,14 @@ const Login = () => {
             setStatus,
         })
     }
+
+    useEffect(() => {
+        if (router.query.reset?.length > 0 && errors.length === 0) {
+            setStatus(atob(router.query.reset))
+        } else {
+            setStatus(null)
+        }
+    })
 
     return (
         <GuestLayout>

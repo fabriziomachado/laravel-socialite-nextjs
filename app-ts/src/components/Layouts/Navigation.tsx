@@ -1,15 +1,14 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
-import Dropdown from '@/components/Dropdown'
 import Link from 'next/link'
-import NavLink from '@/components/NavLink'
-import ResponsiveNavLink, {
-    ResponsiveNavButton,
-} from '@/components/ResponsiveNavLink'
-import { DropdownButton } from '@/components/DropdownLink'
-import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Image from 'next/image'
+
+import ApplicationLogo from '../ApplicationLogo'
+import Dropdown from '../Dropdown'
+import NavLink from '../NavLink'
+import ResponsiveNavLink, { ResponsiveNavButton } from '../ResponsiveNavLink'
+import { DropdownButton } from '../DropdownLink'
+import { useAuth } from '../../hooks/auth'
 
 
 const Navigation = ({ user }) => {
@@ -59,8 +58,8 @@ const Navigation = ({ user }) => {
                                 className="inline-block object-cover w-10 h-10 rounded-full"
                                 src={user?.image}
                                 alt={"Bordered avatar"}
-                                width={300}
-                                height={200}
+                                width={30}
+                                height={20}
                             />
                         </div>
 
