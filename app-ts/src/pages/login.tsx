@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { FormEvent, SetStateAction, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import ApplicationLogo from '../components/ApplicationLogo'
@@ -13,6 +13,11 @@ import Label from '../components/Label'
 
 import { useAuth } from '../hooks/auth'
 
+type IErrors = {
+    email?: string[];
+    password?: string[];
+}
+
 const Login = () => {
     const router = useRouter()
 
@@ -23,15 +28,14 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
+    const [shouldRemember, setShouldRemember] = useState<boolean>(false)
+    const [errors, setErrors] = useState<IErrors>({})
     const [status, setStatus] = useState(null)
 
-
-    const submitForm = async event => {
+    const submitForm = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        login({
+        await login({
             email,
             password,
             remember: shouldRemember,
@@ -40,13 +44,15 @@ const Login = () => {
         })
     }
 
-    useEffect(() => {
-        if (router.query.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.query.reset))
-        } else {
-            setStatus(null)
-        }
-    })
+    // useEffect(() => {
+    //     if (router.query.reset?.length > 0 && errors.length === 0) {
+    //         setStatus(atob(router.query.reset))
+    //         // setStatus(Buffer.from(router.query.reset, 'base64'))
+
+    //     } else {
+    //         setStatus(null)
+    //     }
+    // })
 
     return (
         <GuestLayout>
@@ -62,14 +68,18 @@ const Login = () => {
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
                     <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email" className="" >Email</Label>
 
                         <Input
                             id="email"
                             type="email"
-                            value={email}
+                            autoComplete="email"
+                            name="email"
                             className="block mt-1 w-full"
-                            onChange={event => setEmail(event.target.value)}
+                            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
+                                setEmail(event.target.value)
+                            }
+                            value={email}
                             required
                             autoFocus
                         />
@@ -79,22 +89,19 @@ const Login = () => {
 
                     {/* Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password" className="">Password</Label>
 
                         <Input
                             id="password"
                             type="password"
                             value={password}
                             className="block mt-1 w-full"
-                            onChange={event => setPassword(event.target.value)}
+                            onChange={(event: { target: { value: SetStateAction<string> } }) => setPassword(event.target.value)}
                             required
                             autoComplete="current-password"
                         />
 
-                        <InputError
-                            messages={errors.password}
-                            className="mt-2"
-                        />
+                        <InputError messages={errors.password} className="mt-2" />
                     </div>
 
                     {/* Remember Me */}
@@ -107,7 +114,7 @@ const Login = () => {
                                 type="checkbox"
                                 name="remember"
                                 className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                onChange={event =>
+                                onChange={(event: { target: { checked: SetStateAction<boolean> } }) =>
                                     setShouldRemember(event.target.checked)
                                 }
                             />
