@@ -30,3 +30,15 @@ yarn install
 
 yarn run dev
 
+
+Some Socialite would be nice!
+https://tiagomichaelsousa.dev/articles/oauth-api-and-next-app-in-5-mins#Some Socialite would be nice!
+
+
+sail composer require laravel/socialite
+
+
+sail artisan make:model OAuthProvider -mcf --api
+
+
+
